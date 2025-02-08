@@ -23,7 +23,7 @@ export default function BankCalculator() {
 
   const calculateResults = (): BankResult[] => {
     const bankA = {
-      bank: "SeaBank",
+      bank: "SeaBank Savings",
       type: "Savings Account",
       interest: 4,
       gross: function (principal: number) {
@@ -38,7 +38,7 @@ export default function BankCalculator() {
     };
 
     const bankB = {
-      bank: "Own Bank",
+      bank: "Own Bank TD",
       type: "Time Deposit",
       interest: 7.5,
       gross: function (principal: number) {
@@ -53,7 +53,7 @@ export default function BankCalculator() {
     };
 
     const bankC = {
-      bank: "TonikBank",
+      bank: "TonikBank TD",
       type: "Time Deposit",
       interest: 4.55,
       gross: function (principal: number) {
@@ -67,7 +67,22 @@ export default function BankCalculator() {
       },
     };
 
-    const results = [bankA, bankB, bankC];
+    const bankD = {
+      bank: "TonikBank Stash",
+      type: "Stash Account",
+      interest: 4,
+      gross: function (principal: number) {
+        return principal * 0.04 * (1 / 365);
+      },
+      tax: function (principal: number) {
+        return this.gross(principal) * 0.2;
+      },
+      earnings: function (principal: number) {
+        return (this.gross(principal) - this.tax(principal)) * 365;
+      },
+    };
+
+    const results = [bankA, bankB, bankC, bankD];
 
     if (sortBy) {
       results.sort((a, b) => {
